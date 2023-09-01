@@ -4,22 +4,22 @@
 /**
  * flip_bits - flip bits to convert one number to another number
  * @n: first number
- * @m: second number to convert to
+ * @m: second number to convert
+ *
  * Return: number of bits to change 
  */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned long int diff;
-	int counter;
+	int i, count = 0;
+	unsigned long int current;
+	unsigned long int exclusive = n ^ m;
 
-	diff = n ^ m;
-	counter = 0;
-
-	while (diff)
+	for (i = 63; i >= 0; i--)
 	{
-		counter++;
-		diff &= (diff - 1);
+		current = exclusive >> i;
+		if (current & 1)
+			count++;
 	}
 
-	return (counter);
+	return (count);
 }
